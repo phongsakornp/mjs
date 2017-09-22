@@ -99,7 +99,10 @@ let Net = {
   // `10.0.0.1:443`, `[::1]:80`.
   connect: function(obj) {
     if (obj.ssl) {
-      return this._cs(obj.addr, this._evh, obj, obj.cert || '', obj.key || '', obj.ca_cert || 'ca.pem');
+      let cert = obj.opts.cert || '';
+      let key = obj.opts.key || '';
+      let ca_cert = obj.opts.ca_cert || 'ca.pem';
+      return this._cs(obj.addr, this._evh, obj, cert, key, ca_cert);
     } else {
       return this._c(obj.addr, this._evh, obj);
     }
